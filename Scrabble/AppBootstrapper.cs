@@ -1,14 +1,7 @@
-﻿using System.Windows;
-using Caliburn.Micro;
-using Scrabble.ViewModels;
+﻿using Scrabble.ViewModels;
+using Stylet;
 
 namespace Scrabble
 {
-    public class AppBootstrapper : BootstrapperBase
-    {
-        protected override void OnStartup(object sender, StartupEventArgs e)
-        {
-            DisplayRootViewFor<GameWindowViewModel>();
-        }
-    }
+    public class AppBootstrapper : Bootstrapper<GameWindowViewModel> { }
 }
