@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Scrabble.ViewModels;
 
 namespace Scrabble.Models
 {
     public class SearchNode
     {
-        public SearchNode(Tile origin, Board board, Orientation searchOrientation)
+        public SearchNode(TileViewModel origin, Board board, Orientation searchOrientation)
         {
             Origin = origin;
             Board = board;
@@ -37,7 +38,7 @@ namespace Scrabble.Models
 
         public static List<SearchNode> Nodes { get; } = new List<SearchNode>();
 
-        public Tile Origin { get; set; }
+        public TileViewModel Origin { get; set; }
 
         public Board Board { get; set; }
 

@@ -1,12 +1,12 @@
-﻿<Window x:Class="Scrabble.Views.TileView"
+﻿<UserControl x:Class="Scrabble.Views.TileView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Scrabble.Views"
-        mc:Ignorable="d"
-        Title="TileView" Height="450" Width="800">
+        xmlns:s="https://github.com/canton7/Stylet"
+        mc:Ignorable="d">
     <Grid>
-        
+        <TextBox Text="{Binding PlacedLetter}"/>
     </Grid>
-</Window>
+</UserControl>

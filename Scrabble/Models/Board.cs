@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Data;
+using Scrabble.ViewModels;
 
 namespace Scrabble.Models
 {
@@ -15,7 +16,7 @@ namespace Scrabble.Models
 
         }
 
-        public Tile[][] Tiles { get; set; }
+        public TileViewModel[][] Tiles { get; set; }
 
 
     }
