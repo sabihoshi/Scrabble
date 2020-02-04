@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Data;
-using Scrabble.ViewModels;
+﻿using Scrabble.ViewModels;
 
 namespace Scrabble.Models
 {
@@ -11,13 +6,10 @@ namespace Scrabble.Models
     {
         public const int Size = 15;
 
-        public void ResetTiles()
-        {
-
-        }
-
         public TileViewModel[][] Tiles { get; set; }
 
-
+        public void ResetTiles()
+        {
+        }
     }
 }

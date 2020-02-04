@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Scrabble.ViewModels
+﻿namespace Scrabble.ViewModels
 {
-    class BoardViewModel
+    internal class BoardViewModel
     {
     }
 }

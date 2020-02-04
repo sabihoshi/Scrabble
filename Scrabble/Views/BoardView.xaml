@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:Scrabble.Views"
         mc:Ignorable="d"
         Title="BoardView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Grid />
 </Window>

@@ -3,5 +3,7 @@ using Stylet;
 
 namespace Scrabble
 {
-    public class AppBootstrapper : Bootstrapper<GameWindowViewModel> { }
+    public class AppBootstrapper : Bootstrapper<GameWindowViewModel>
+    {
+    }
 }
