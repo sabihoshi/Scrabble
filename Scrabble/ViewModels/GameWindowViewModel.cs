@@ -12,6 +12,6 @@ namespace Scrabble.ViewModels
 
         public List<Player> Players { get; set; } = new List<Player>();
 
-        public TileViewModel Tile { get; set; } = new TileViewModel();
+        public Tile Tile { get; set; } = new Tile();
     }
 }
