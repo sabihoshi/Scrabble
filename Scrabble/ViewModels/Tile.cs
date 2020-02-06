@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.CompilerServices;
@@ -17,25 +18,24 @@ namespace Scrabble.ViewModels
             Star
         }
 
-        public Tile(Color color, int letterMultiplier, int wordMultiplier)
+        public Tile(string tileColor, int letterMultiplier, int wordMultiplier)
         {
-            Color = color;
+            TileColor = tileColor;
             LetterMultiplier = letterMultiplier;
             WordMultiplier = wordMultiplier;
         }
 
-        public Tile(string color, int letterMultiplier, int wordMultiplier) : this(StringToColor(color),
-            letterMultiplier, wordMultiplier) { }
+        public Tile(Color color, int letterMultiplier, int wordMultiplier) : this(color.Name, letterMultiplier, wordMultiplier) { }
 
         public int LetterMultiplier { get; set; }
 
         public int WordMultiplier { get; set; }
 
-        public Color Color { get; set; }
+        public string TileColor { get; set; }
 
         public Player PlacedBy { get; set; }
 
-        public string PlacedLetter { get; set; }
+        public string PlacedLetter { get; set; } = "A";
 
         public bool HasLetter => string.IsNullOrWhiteSpace(PlacedLetter);
 
@@ -54,12 +54,6 @@ namespace Scrabble.ViewModels
                 Type.Star     => new Tile(Color.Yellow, 2, 1),
                 _             => new Tile(Color.White, 1, 1)
             };
-        }
-
-        private static Color StringToColor(string color)
-        {
-            int argb = int.Parse(color.Replace("#", ""), NumberStyles.HexNumber);
-            return Color.FromArgb(argb);
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

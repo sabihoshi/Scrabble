@@ -1,11 +1,12 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Scrabble.Views
 {
     /// <summary>
     ///     Interaction logic for BoardView.xaml
     /// </summary>
-    public partial class BoardView : Window
+    public partial class BoardView : UserControl
     {
         public BoardView()
         {

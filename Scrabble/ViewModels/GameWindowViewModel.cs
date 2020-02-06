@@ -1,17 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Scrabble.Models;
 
 namespace Scrabble.ViewModels
 {
-    public class GameWindowViewModel
+    public class GameWindowViewModel : INotifyPropertyChanged
     {
         public GameWindowViewModel()
         {
-            Tile.PlacedLetter = "B";
+            Board.ResetTiles();
         }
 
         public List<Player> Players { get; set; } = new List<Player>();
 
-        public Tile Tile { get; set; } = new Tile();
+        public BoardViewModel Board { get; set; } = new BoardViewModel();
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

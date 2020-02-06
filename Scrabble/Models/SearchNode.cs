@@ -24,10 +24,10 @@ namespace Scrabble.Models
             Horizontal
         }
 
-        public SearchNode(Tile origin, Board board, Orientation searchOrientation)
+        public SearchNode(Tile origin, BoardViewModel boardViewModel, Orientation searchOrientation)
         {
             Origin = origin;
-            Board = board;
+            BoardViewModel = boardViewModel;
             SearchOrientation = searchOrientation;
         }
 
@@ -35,7 +35,7 @@ namespace Scrabble.Models
 
         public Tile Origin { get; set; }
 
-        public Board Board { get; set; }
+        public BoardViewModel BoardViewModel { get; set; }
 
         public Orientation SearchOrientation { get; set; }
 
@@ -45,7 +45,7 @@ namespace Scrabble.Models
 
         public SearchNode InverseNode(Point start)
         {
-            return new SearchNode(Board.Tiles[start.Y][start.X], Board, Inverse(SearchOrientation));
+            return new SearchNode(BoardViewModel.Tiles[start.Y][start.X], BoardViewModel, Inverse(SearchOrientation));
         }
 
         public void Search()
@@ -96,7 +96,7 @@ namespace Scrabble.Models
 
                     break;
                 case Direction.Down:
-                    for (var i = Origin.Position.Y + 1; i < Board.Size; i++)
+                    for (var i = Origin.Position.Y + 1; i < BoardViewModel.Size; i++)
                         yield return new Point(Origin.Position.X, i);
 
                     break;
@@ -107,7 +107,7 @@ namespace Scrabble.Models
                     break;
 
                 case Direction.Right:
-                    for (var i = Origin.Position.X + 1; i < Board.Size; i++)
+                    for (var i = Origin.Position.X + 1; i < BoardViewModel.Size; i++)
                         yield return new Point(i, Origin.Position.Y);
 
                     break;
