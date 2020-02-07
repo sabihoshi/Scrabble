@@ -16,9 +16,20 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="GameWindowView" Height="450" Width="800">
     <Grid>
-        <StackPanel HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch">
-            <ContentControl s:View.Model="{Binding Board}" />
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <Viewbox>
+            <ContentControl s:View.Model="{Binding Board}"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+        </Viewbox>
+
     </Grid>
 </Window>

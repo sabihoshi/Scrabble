@@ -8,8 +8,9 @@
     <UserControl.Resources>
         <DataTemplate x:Key="DataTemplate_Level2">
             <Button Content="{Binding PlacedLetter}"
-                    Background="{DynamicResource DarkBrush}"
+                    Background="{DynamicResource DarkBrush}" Foreground="Black"
                     BorderBrush="{DynamicResource DarkBrush}"
+                    Width="40" Height="40"
                     Margin="5" Padding="5">
                 <Button.Resources>
                     <SolidColorBrush x:Key="DarkBrush" Color="{Binding TileColor}" />
@@ -22,7 +23,9 @@
                           ItemTemplate="{DynamicResource DataTemplate_Level2}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Stretch"
+                                    HorizontalAlignment="Stretch" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
@@ -30,6 +33,8 @@
     </UserControl.Resources>
     <Grid>
         <ItemsControl ItemsSource="{Binding Tiles}"
-                      ItemTemplate="{DynamicResource DataTemplate_Level1}" />
+                      ItemTemplate="{DynamicResource DataTemplate_Level1}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch" />
     </Grid>
 </UserControl>
