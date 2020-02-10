@@ -4,37 +4,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Scrabble.Views"
+             xmlns:viewModels="clr-namespace:Scrabble.ViewModels"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <DataTemplate x:Key="DataTemplate_Level2">
-            <Button Content="{Binding PlacedLetter}"
-                    Background="{DynamicResource DarkBrush}" Foreground="Black"
-                    BorderBrush="{DynamicResource DarkBrush}"
-                    Width="40" Height="40"
-                    Margin="5" Padding="5">
-                <Button.Resources>
-                    <SolidColorBrush x:Key="DarkBrush" Color="{Binding TileColor}" />
-                </Button.Resources>
-            </Button>
-        </DataTemplate>
-
-        <DataTemplate x:Key="DataTemplate_Level1">
-            <ItemsControl ItemsSource="{Binding}"
-                          ItemTemplate="{DynamicResource DataTemplate_Level2}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"
-                                    VerticalAlignment="Stretch"
-                                    HorizontalAlignment="Stretch" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
-        </DataTemplate>
-    </UserControl.Resources>
     <Grid>
-        <ItemsControl ItemsSource="{Binding Tiles}"
-                      ItemTemplate="{DynamicResource DataTemplate_Level1}"
+        <ItemsControl ItemsSource="{Binding Board}"
                       HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch" />
+                      VerticalAlignment="Stretch">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type viewModels:Tile}">
+                    <Button Content="{Binding PlacedLetter}"
+                            Background="{DynamicResource DarkBrush}" Foreground="Black"
+                            BorderBrush="{DynamicResource DarkBrush}"
+                            Width="35" Height="35"
+                            Margin="5" Padding="5">
+                        <Button.Resources>
+                            <SolidColorBrush x:Key="DarkBrush" Color="{Binding TileColor}" />
+                        </Button.Resources>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="15" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
     </Grid>
 </UserControl>

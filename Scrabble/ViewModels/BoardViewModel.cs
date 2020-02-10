@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using Stylet;
 using static Scrabble.ViewModels.Tile;
 
 namespace Scrabble.ViewModels
@@ -9,6 +11,10 @@ namespace Scrabble.ViewModels
         public const int Size = 15;
 
         public Tile[][] Tiles { get; set; } = new Tile[Size][];
+
+        public BindableCollection<Tile> Board => new BindableCollection<Tile>(Tiles.SelectMany(x => x));
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void ResetTiles()
         {
@@ -297,8 +303,6 @@ namespace Scrabble.ViewModels
                 Create(Type.Red)
             };
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

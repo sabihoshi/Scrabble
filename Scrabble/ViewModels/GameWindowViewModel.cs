@@ -12,6 +12,8 @@ namespace Scrabble.ViewModels
             Board.ResetTiles();
         }
 
+        public Tile PressedTile { get; set; }
+
         public List<Player> Players { get; set; } = new List<Player>();
 
         public BoardViewModel Board { get; set; } = new BoardViewModel();
