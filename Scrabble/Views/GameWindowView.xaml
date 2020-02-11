@@ -17,15 +17,18 @@
         Title="GameWindowView" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-
-        <Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="1">
             <ContentControl s:View.Model="{Binding Board}"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch" />

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Stylet;
-using static Scrabble.ViewModels.Tile;
+using static Scrabble.ViewModels.TileViewModel;
 
 namespace Scrabble.ViewModels
 {
@@ -10,9 +10,9 @@ namespace Scrabble.ViewModels
     {
         public const int Size = 15;
 
-        public Tile[][] Tiles { get; set; } = new Tile[Size][];
+        public TileViewModel[][] Tiles { get; set; } = new TileViewModel[Size][];
 
-        public BindableCollection<Tile> Board => new BindableCollection<Tile>(Tiles.SelectMany(x => x));
+        public BindableCollection<TileViewModel> Board => new BindableCollection<TileViewModel>(Tiles.SelectMany(x => x));
 
         public event PropertyChangedEventHandler PropertyChanged;
 

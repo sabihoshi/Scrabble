@@ -5,22 +5,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Scrabble.Views"
              xmlns:viewModels="clr-namespace:Scrabble.ViewModels"
+             xmlns:s="https://github.com/canton7/Stylet"
              mc:Ignorable="d">
     <Grid>
         <ItemsControl ItemsSource="{Binding Board}"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch">
             <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewModels:Tile}">
-                    <Button Content="{Binding PlacedLetter}"
-                            Background="{DynamicResource DarkBrush}" Foreground="Black"
-                            BorderBrush="{DynamicResource DarkBrush}"
-                            Width="35" Height="35"
-                            Margin="5" Padding="5">
-                        <Button.Resources>
-                            <SolidColorBrush x:Key="DarkBrush" Color="{Binding TileColor}" />
-                        </Button.Resources>
-                    </Button>
+                <DataTemplate>
+                    <ContentControl s:View.Model="{Binding}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
 

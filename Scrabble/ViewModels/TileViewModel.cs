@@ -7,7 +7,7 @@ using Scrabble.Models;
 
 namespace Scrabble.ViewModels
 {
-    public class Tile : INotifyPropertyChanged
+    public class TileViewModel : INotifyPropertyChanged
     {
         public enum Type
         {
@@ -18,14 +18,14 @@ namespace Scrabble.ViewModels
             Star
         }
 
-        public Tile(string tileColor, int letterMultiplier, int wordMultiplier)
+        public TileViewModel(string tileColor, int letterMultiplier, int wordMultiplier)
         {
             TileColor = tileColor;
             LetterMultiplier = letterMultiplier;
             WordMultiplier = wordMultiplier;
         }
 
-        public Tile(Color color, int letterMultiplier, int wordMultiplier) : this(color.Name, letterMultiplier, wordMultiplier) { }
+        public TileViewModel(Color color, int letterMultiplier, int wordMultiplier) : this(color.Name, letterMultiplier, wordMultiplier) { }
 
         public int LetterMultiplier { get; set; }
 
@@ -43,16 +43,16 @@ namespace Scrabble.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public static Tile Create(Type? type = null)
+        public static TileViewModel Create(Type? type = null)
         {
             return type switch
             {
-                Type.Blue     => new Tile("#90C2E5", 1, 2),
-                Type.DarkBlue => new Tile("#3187C2", 1, 2),
-                Type.Pink     => new Tile("#DB8298", 2, 1),
-                Type.Red      => new Tile("#B3172C", 2, 1),
-                Type.Star     => new Tile(Color.Yellow, 2, 1),
-                _             => new Tile(Color.White, 1, 1)
+                Type.Blue     => new TileViewModel("#90C2E5", 1, 2),
+                Type.DarkBlue => new TileViewModel("#3187C2", 1, 2),
+                Type.Pink     => new TileViewModel("#DB8298", 2, 1),
+                Type.Red      => new TileViewModel("#B3172C", 2, 1),
+                Type.Star     => new TileViewModel(Color.Yellow, 2, 1),
+                _             => new TileViewModel(Color.White, 1, 1)
             };
         }
 

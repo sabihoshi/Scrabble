@@ -6,7 +6,13 @@
              xmlns:local="clr-namespace:Scrabble.Views"
              xmlns:s="https://github.com/canton7/Stylet"
              mc:Ignorable="d">
-    <Grid>
-        <TextBox Text="{Binding PlacedLetter}" />
-    </Grid>
+    <Button Content="{Binding PlacedLetter}"
+            Background="{DynamicResource DarkBrush}" Foreground="Black"
+            BorderBrush="{DynamicResource DarkBrush}"
+            Width="35" Height="35"
+            Margin="5" Padding="5">
+        <Button.Resources>
+            <SolidColorBrush x:Key="DarkBrush" Color="{Binding TileColor}" />
+        </Button.Resources>
+    </Button>
 </UserControl>
