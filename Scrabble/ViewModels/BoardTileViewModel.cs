@@ -28,8 +28,6 @@ namespace Scrabble.ViewModels
 
         public TileViewModel TileViewModel { get; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public static BoardTileViewModel Create(Type? type = null)
         {
             return type switch
@@ -41,11 +39,6 @@ namespace Scrabble.ViewModels
                 Type.Star     => new BoardTileViewModel(Color.Yellow, 2, 1),
                 _             => new BoardTileViewModel(Color.White, 1, 1)
             };
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Scrabble.Models
         }
 
         public static List<SearchNode> Nodes { get; } = new List<SearchNode>();
-         
+
         public BoardTileViewModel Origin { get; set; }
 
         public BoardViewModel BoardViewModel { get; set; }
@@ -43,10 +43,8 @@ namespace Scrabble.Models
 
         public Point End { get; set; }
 
-        public SearchNode InverseNode(Point start)
-        {
-            return new SearchNode(BoardViewModel.Tiles[start.Y][start.X], BoardViewModel, Inverse(SearchOrientation));
-        }
+        public SearchNode InverseNode(Point start) =>
+            new SearchNode(BoardViewModel.Tiles[start.Y][start.X], BoardViewModel, Inverse(SearchOrientation));
 
         public void Search()
         {
@@ -64,8 +62,8 @@ namespace Scrabble.Models
 
         public Point Seek(Direction direction)
         {
-            var result = Origin.Position;
-            foreach (var position in SearchGenerator(direction))
+            Point result = Origin.Position;
+            foreach (Point position in SearchGenerator(direction))
             {
                 if (!Nodes.Any(n => n.Origin.Position == position && n.SearchOrientation == Inverse(SearchOrientation)))
                     Nodes.Add(InverseNode(position));
@@ -79,10 +77,8 @@ namespace Scrabble.Models
             return result;
         }
 
-        public Orientation Inverse(Orientation orientation)
-        {
-            return orientation == Orientation.Horizontal ? Orientation.Vertical : Orientation.Horizontal;
-        }
+        public Orientation Inverse(Orientation orientation) =>
+            orientation == Orientation.Horizontal ? Orientation.Vertical : Orientation.Horizontal;
 
         // This does not include the starting position, as we already know
         // It is a guaranteed letter.
@@ -91,28 +87,28 @@ namespace Scrabble.Models
             switch (direction)
             {
                 case Direction.Up:
-                    for (var i = Origin.Position.Y - 1; i >= 0; i--)
+                    for (int i = Origin.Position.Y - 1; i >= 0; i--)
                         yield return new Point(Origin.Position.X, i);
 
                     break;
                 case Direction.Down:
-                    for (var i = Origin.Position.Y + 1; i < BoardViewModel.Size; i++)
+                    for (int i = Origin.Position.Y + 1; i < BoardViewModel.Size; i++)
                         yield return new Point(Origin.Position.X, i);
 
                     break;
                 case Direction.Left:
-                    for (var i = Origin.Position.X - 1; i >= 0; i--)
+                    for (int i = Origin.Position.X - 1; i >= 0; i--)
                         yield return new Point(i, Origin.Position.Y);
 
                     break;
 
                 case Direction.Right:
-                    for (var i = Origin.Position.X + 1; i < BoardViewModel.Size; i++)
+                    for (int i = Origin.Position.X + 1; i < BoardViewModel.Size; i++)
                         yield return new Point(i, Origin.Position.Y);
 
                     break;
                 case Direction.None: break;
-                default: throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+                default:             throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
         }
     }

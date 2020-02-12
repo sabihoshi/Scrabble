@@ -7,10 +7,7 @@ namespace Scrabble.ViewModels
 {
     public class GameWindowViewModel : INotifyPropertyChanged
     {
-        public GameWindowViewModel()
-        {
-            Board.ResetTiles();
-        }
+        public GameWindowViewModel() { Board.ResetTiles(); }
 
         public BoardTileViewModel PressedBoardTile { get; set; }
 

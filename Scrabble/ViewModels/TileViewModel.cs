@@ -13,10 +13,7 @@ namespace Scrabble.Models
             Star
         }
 
-        public TileViewModel(string tileColor)
-        {
-            TileColor = tileColor;
-        }
+        public TileViewModel(string tileColor) => TileColor = tileColor;
 
         public string TileColor { get; set; }
 

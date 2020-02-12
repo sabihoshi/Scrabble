@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Scrabble.Views
 {
@@ -8,9 +7,6 @@ namespace Scrabble.Views
     /// </summary>
     public partial class BoardView : UserControl
     {
-        public BoardView()
-        {
-            InitializeComponent();
-        }
+        public BoardView() { InitializeComponent(); }
     }
 }

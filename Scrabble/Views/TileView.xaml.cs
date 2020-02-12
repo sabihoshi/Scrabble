@@ -7,9 +7,6 @@ namespace Scrabble.Views
     /// </summary>
     public partial class TileView : UserControl
     {
-        public TileView()
-        {
-            InitializeComponent();
-        }
+        public TileView() { InitializeComponent(); }
     }
 }

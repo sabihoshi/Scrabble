@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Scrabble.Models
+﻿namespace Scrabble.Models
 {
     public abstract class Rack
     {

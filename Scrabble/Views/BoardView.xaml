@@ -3,10 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:Scrabble.Views"
-             xmlns:viewModels="clr-namespace:Scrabble.ViewModels"
-             xmlns:s="https://github.com/canton7/Stylet"
-             xmlns:models="clr-namespace:Scrabble.Models"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ControlTemplate x:Key="Tile">
@@ -27,7 +23,7 @@
                       VerticalAlignment="Stretch">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <ContentControl Template="{StaticResource Tile}" Content="{Binding}"/>
+                    <ContentControl Template="{StaticResource Tile}" Content="{Binding}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
 
