@@ -4,29 +4,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <ControlTemplate x:Key="Tile">
-            <Button Content="{Binding PlacedLetter}"
-                    Background="{DynamicResource DarkBrush}" Foreground="Black"
-                    BorderBrush="{DynamicResource DarkBrush}"
-                    Width="35" Height="35"
-                    Margin="5" Padding="5">
-                <Button.Resources>
-                    <SolidColorBrush x:Key="DarkBrush" Color="{Binding TileColor}" />
-                </Button.Resources>
-            </Button>
-        </ControlTemplate>
-    </UserControl.Resources>
+    
     <Grid>
         <ItemsControl ItemsSource="{Binding Board}"
                       HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ContentControl Template="{StaticResource Tile}" Content="{Binding}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-
+                      VerticalAlignment="Stretch"
+                      ItemTemplate="{StaticResource Tile}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="15" />

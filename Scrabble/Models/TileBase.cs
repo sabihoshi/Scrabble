@@ -2,7 +2,7 @@
 
 namespace Scrabble.Models
 {
-    public abstract class TileViewModel : INotifyPropertyChanged
+    public abstract class TileBase : INotifyPropertyChanged
     {
         public enum Type
         {
@@ -13,7 +13,7 @@ namespace Scrabble.Models
             Star
         }
 
-        public TileViewModel(string tileColor) => TileColor = tileColor;
+        public TileBase(string tileColor) => TileColor = tileColor;
 
         public string TileColor { get; set; }
 
