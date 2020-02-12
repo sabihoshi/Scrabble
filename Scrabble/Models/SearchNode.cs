@@ -24,7 +24,7 @@ namespace Scrabble.Models
             Horizontal
         }
 
-        public SearchNode(TileViewModel origin, BoardViewModel boardViewModel, Orientation searchOrientation)
+        public SearchNode(BoardTileViewModel origin, BoardViewModel boardViewModel, Orientation searchOrientation)
         {
             Origin = origin;
             BoardViewModel = boardViewModel;
@@ -33,7 +33,7 @@ namespace Scrabble.Models
 
         public static List<SearchNode> Nodes { get; } = new List<SearchNode>();
          
-        public TileViewModel Origin { get; set; }
+        public BoardTileViewModel Origin { get; set; }
 
         public BoardViewModel BoardViewModel { get; set; }
 

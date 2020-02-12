@@ -6,14 +6,28 @@
              xmlns:local="clr-namespace:Scrabble.Views"
              xmlns:viewModels="clr-namespace:Scrabble.ViewModels"
              xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:models="clr-namespace:Scrabble.Models"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="Tile">
+            <Button Content="{Binding PlacedLetter}"
+                    Background="{DynamicResource DarkBrush}" Foreground="Black"
+                    BorderBrush="{DynamicResource DarkBrush}"
+                    Width="35" Height="35"
+                    Margin="5" Padding="5">
+                <Button.Resources>
+                    <SolidColorBrush x:Key="DarkBrush" Color="{Binding TileColor}" />
+                </Button.Resources>
+            </Button>
+        </ControlTemplate>
+    </UserControl.Resources>
     <Grid>
         <ItemsControl ItemsSource="{Binding Board}"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <ContentControl s:View.Model="{Binding}"/>
+                    <ContentControl Template="{StaticResource Tile}" Content="{Binding}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
 

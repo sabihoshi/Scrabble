@@ -7,6 +7,7 @@
         xmlns:s="https://github.com/canton7/Stylet"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:models="clr-namespace:Scrabble.Models"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -15,6 +16,19 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="GameWindowView" Height="450" Width="800">
+    <Window.Resources>
+        <ControlTemplate x:Key="Tile">
+            <Button Content="{Binding PlacedLetter}"
+                    Background="{DynamicResource DarkBrush}" Foreground="Black"
+                    BorderBrush="{DynamicResource DarkBrush}"
+                    Width="35" Height="35"
+                    Margin="5" Padding="5">
+                <Button.Resources>
+                    <SolidColorBrush x:Key="DarkBrush" Color="{Binding TileColor}" />
+                </Button.Resources>
+            </Button>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

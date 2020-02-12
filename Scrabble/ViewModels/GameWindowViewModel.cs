@@ -12,7 +12,7 @@ namespace Scrabble.ViewModels
             Board.ResetTiles();
         }
 
-        public TileViewModel PressedTile { get; set; }
+        public BoardTileViewModel PressedBoardTile { get; set; }
 
         public List<Player> Players { get; set; } = new List<Player>();
 
