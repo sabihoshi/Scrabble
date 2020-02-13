@@ -20,6 +20,7 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="10*" />
@@ -32,5 +33,42 @@
                             VerticalAlignment="Stretch" />
         </Viewbox>
 
+
+        <!-- Players -->
+        <Viewbox Grid.Row="0" Grid.Column="1">
+            <ContentControl
+                s:View.Model="{Binding PlayerOne.Rack}"
+                Visibility="{Binding HasPlayerOne, 
+                Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Grid.Column="1">
+            <ContentControl
+                s:View.Model="{Binding PlayerTwo.Rack}"
+                Visibility="{Binding HasPlayerTwo, 
+            Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Viewbox>
+
+        <Viewbox Grid.Row="1" Grid.Column="0">
+            <ContentControl
+                s:View.Model="{Binding PlayerThree.Rack}"
+                Visibility="{Binding HasPlayerThree, 
+            Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Viewbox>
+
+        <Viewbox Grid.Row="1" Grid.Column="2">
+            <ContentControl
+                s:View.Model="{Binding PlayerFour.Rack}"
+                Visibility="{Binding HasPlayerFour, 
+                Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Viewbox>
+
+        <Grid.Resources>
+            <Style TargetType="ContentControl">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </Grid.Resources>
     </Grid>
 </Window>

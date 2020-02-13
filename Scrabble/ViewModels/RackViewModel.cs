@@ -4,11 +4,9 @@ using Stylet;
 
 namespace Scrabble.ViewModels
 {
-    public abstract class RackViewModel : TileBase
+    public class RackViewModel
     {
-        protected RackViewModel(string tileColor) : base(tileColor) { }
-
-        public BindableCollection<ITile> Tiles { get; set; }
+        public BindableCollection<ITile> Tiles { get; set; } = new BindableCollection<ITile>();
 
         public Player Player { get; set; }
 

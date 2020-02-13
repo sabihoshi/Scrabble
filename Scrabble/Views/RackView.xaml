@@ -6,9 +6,7 @@
              xmlns:local="clr-namespace:Scrabble.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <ItemsControl ItemsSource="{Binding Board}"
-                  HorizontalAlignment="Stretch"
-                  VerticalAlignment="Stretch"
+    <ItemsControl ItemsSource="{Binding Tiles}"
                   ItemTemplate="{StaticResource Tile}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>

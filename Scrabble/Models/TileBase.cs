@@ -17,7 +17,7 @@ namespace Scrabble.Models
 
         public string TileColor { get; set; }
 
-        public string PlacedLetter { get; set; } = " ";
+        public Letter PlacedLetter { get; set; } = new Letter(' ', 0);
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

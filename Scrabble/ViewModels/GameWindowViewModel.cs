@@ -17,15 +17,25 @@ namespace Scrabble.ViewModels
 
         public List<Player> Players { get; set; } = new List<Player>();
 
-        public Player PlayerOne => Players[0];
-        public Player PlayerTwo => Players[1];
-        public Player PlayerThree => Players[2];
-        public Player PlayerFour => Players[3];
+        public Player PlayerOne => HasPlayerOne ? Players[0] : null;
+        public Player PlayerTwo => HasPlayerTwo ? Players[1] : null;
+        public Player PlayerThree => HasPlayerThree ? Players[2] : null;
+        public Player PlayerFour => HasPlayerFour ? Players[3] : null;
 
         public bool HasPlayerOne => Players.Count >= 1;
         public bool HasPlayerTwo => Players.Count >= 2;
         public bool HasPlayerThree => Players.Count >= 3;
         public bool HasPlayerFour => Players.Count >= 4;
+
+        public void ConfirmMove()
+        {
+
+        }
+
+        public void CancelMove()
+        {
+
+        }
 
         public BoardViewModel Board { get; set; } = new BoardViewModel();
 

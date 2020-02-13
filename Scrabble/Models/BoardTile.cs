@@ -22,7 +22,7 @@ namespace Scrabble.ViewModels
 
         public Player PlacedBy { get; set; }
 
-        public bool HasLetter => string.IsNullOrWhiteSpace(TileBase.PlacedLetter);
+        public bool HasLetter => string.IsNullOrWhiteSpace(TileBase.PlacedLetter.Character.ToString());
 
         public Point Position { get; set; }
 
