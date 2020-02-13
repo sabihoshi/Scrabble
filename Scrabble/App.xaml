@@ -17,7 +17,7 @@
                     <DataTemplate x:Key="Tile" DataType="{x:Type models:TileBase}">
                         <Button Command="{s:Action PublishEvent}"
                                 s:View.ActionTarget="{Binding}"
-                                Content="{Binding PlacedLetter.Character}"
+                                Content="{Binding Letter.Character}"
                                 Background="{DynamicResource Background}" Foreground="Black"
                                 BorderBrush="{DynamicResource Background}"
                                 Width="35" Height="35"

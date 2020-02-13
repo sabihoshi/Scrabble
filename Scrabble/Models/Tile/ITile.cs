@@ -4,7 +4,7 @@
     {
         string TileColor { get; set; }
 
-        Letter.Letter PlacedLetter { get; set; }
+        Letter.Letter Letter { get; set; }
 
         public bool IsHighlighted { get; set; }
     }

@@ -7,8 +7,6 @@ namespace Scrabble.Models.Tile
 {
     public abstract class TileBase : INotifyPropertyChanged, ITile
     {
-        private string _tileColor;
-
         public enum Type
         {
             Blue,
@@ -18,22 +16,24 @@ namespace Scrabble.Models.Tile
             Star
         }
 
+        private string _tileColor;
+
         public TileBase(string tileColor) => TileColor = tileColor;
 
         [Inject]
         public IEventAggregator Aggregator { get; set; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public string TileColor
         {
-            get => IsHighlighted ? Color.MediumAquamarine.Name :_tileColor;
+            get => IsHighlighted ? Color.MediumAquamarine.Name : _tileColor;
             set => _tileColor = value;
         }
 
         public bool IsHighlighted { get; set; }
 
-        public Letter.Letter PlacedLetter { get; set; } = new Letter.Letter(' ', 0);
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public Letter.Letter Letter { get; set; }
 
         public abstract void PublishEvent();
     }

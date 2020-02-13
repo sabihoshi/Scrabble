@@ -9,7 +9,7 @@ namespace Scrabble.Models.Tile
     {
         public RackTile(Player player) : base("#EDBD11")
         {
-            PlacedLetter = LetterBag.GetLetter();
+            Letter = LetterBag.GetLetter();
             Player = player;
         }
 

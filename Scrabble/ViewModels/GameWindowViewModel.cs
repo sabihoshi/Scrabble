@@ -9,19 +9,17 @@ using IContainer = StyletIoC.IContainer;
 
 namespace Scrabble.ViewModels
 {
-    public class GameWindowViewModel
-        : INotifyPropertyChanged, IHandle<TilePressedEvent<BoardTile>>, IHandle<TilePressedEvent<RackTile>>
+    public class GameWindowViewModel : INotifyPropertyChanged, 
+        IHandle<TilePressedEvent<BoardTile>>, 
+        IHandle<TilePressedEvent<RackTile>>
     {
-        private readonly IContainer _ioc;
+        private ITile? _selectedBoardTile;
 
         private ITile? _selectedRackTile;
 
-        private ITile? _selectedBoardTile;
-
         public GameWindowViewModel(IEventAggregator eventAggregator, IContainer ioc)
         {
-            _ioc = ioc;
-            Board = _ioc.Get<BoardViewModel>();
+            Board = ioc.Get<BoardViewModel>();
             eventAggregator.Subscribe(this);
             Board.ResetTiles();
             Players.Add(ioc.Get<Player>());
@@ -31,6 +29,8 @@ namespace Scrabble.ViewModels
         private Player CurrentPlayer { get; }
 
         public BoardViewModel Board { get; set; }
+
+        public List<(BoardTile boardTile, RackTile rackTile)> PlacedTiles { get; set; } = new List<(BoardTile, RackTile)>();
 
         public List<Player> Players { get; set; } = new List<Player>();
 
@@ -82,15 +82,29 @@ namespace Scrabble.ViewModels
 
         public void ConfirmMove() { }
 
-        public void CancelMove() { }
+        public void CancelMove()
+        {
+            foreach (var tile in PlacedTiles)
+            {
+                tile.rackTile.Player.Rack.Tiles.Add(tile.rackTile);
+                tile.boardTile.Reset();
+            }
+            PlacedTiles.Clear();
+        }
 
         public void PlaceTile()
         {
             if (_selectedRackTile is null || _selectedBoardTile is null)
                 return;
 
-            _selectedBoardTile.PlacedLetter = _selectedRackTile.PlacedLetter;
-            ((RackTile)_selectedRackTile).Player.Rack.Tiles.Remove(_selectedRackTile);
+            var boardTile = (BoardTile)_selectedBoardTile;
+            var rackTile = (RackTile)_selectedRackTile;
+
+            PlacedTiles.Add((boardTile, rackTile));
+            rackTile.Player.Rack.Tiles.Remove(_selectedRackTile);
+
+            boardTile.Letter = rackTile.Letter;
+            boardTile.PlacedBy = CurrentPlayer;
 
             DeselectTile(ref _selectedBoardTile);
             DeselectTile(ref _selectedRackTile);

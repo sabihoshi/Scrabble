@@ -15,13 +15,19 @@ namespace Scrabble.Models.Tile
         public BoardTile(Color color, int letterMultiplier, int wordMultiplier) : this(color.Name,
             letterMultiplier, wordMultiplier) { }
 
+        public void Reset()
+        {
+            PlacedBy = null;
+            Letter = null;
+        }
+
         public int LetterMultiplier { get; set; }
 
         public int WordMultiplier { get; set; }
 
         public Player PlacedBy { get; set; }
 
-        public bool HasLetter => string.IsNullOrWhiteSpace(TileBase.PlacedLetter.Character.ToString());
+        public bool HasLetter => string.IsNullOrWhiteSpace(TileBase.Letter.Character.ToString());
 
         public Point Position { get; set; }
 
