@@ -2,7 +2,7 @@
 
 namespace Scrabble.Models
 {
-    public abstract class TileBase : INotifyPropertyChanged
+    public abstract class TileBase : INotifyPropertyChanged, ITile
     {
         public enum Type
         {
@@ -17,7 +17,7 @@ namespace Scrabble.Models
 
         public string TileColor { get; set; }
 
-        public string PlacedLetter { get; set; } = "A";
+        public string PlacedLetter { get; set; } = " ";
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

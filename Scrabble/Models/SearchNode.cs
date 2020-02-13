@@ -44,7 +44,7 @@ namespace Scrabble.Models
         public Point End { get; set; }
 
         public SearchNode InverseNode(Point start) =>
-            new SearchNode(BoardViewModel.Tiles[start.Y][start.X], BoardViewModel, Inverse(SearchOrientation));
+            new SearchNode((BoardTile)BoardViewModel.Tiles[start.Y][start.X], BoardViewModel, Inverse(SearchOrientation));
 
         public void Search()
         {
