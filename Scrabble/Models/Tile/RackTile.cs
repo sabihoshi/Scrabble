@@ -7,7 +7,13 @@ namespace Scrabble.Models.Tile
 {
     public class RackTile : TileBase
     {
-        public RackTile() : base("#EDBD11") => PlacedLetter = LetterBag.GetLetter();
+        public RackTile(Player player) : base("#EDBD11")
+        {
+            PlacedLetter = LetterBag.GetLetter();
+            Player = player;
+        }
+
+        public Player Player { get; set; }
 
         public Color ForegroundColor { get; set; }
 

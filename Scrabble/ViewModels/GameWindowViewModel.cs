@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Scrabble.Events;
-using Scrabble.Models.Player;
+using Scrabble.Models;
 using Scrabble.Models.Tile;
 using Stylet;
 using IContainer = StyletIoC.IContainer;
@@ -80,6 +80,8 @@ namespace Scrabble.ViewModels
                 return;
 
             SelectedBoardTile.PlacedLetter = SelectedRackTile.PlacedLetter;
+            SelectedRackTile.Player.Rack.Tiles.Remove(SelectedRackTile);
+
             SelectedRackTile = null;
             SelectedBoardTile = null;
         }

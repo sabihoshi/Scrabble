@@ -6,25 +6,16 @@ using Scrabble.Models.Tile;
 using Scrabble.ViewModels;
 using IContainer = StyletIoC.IContainer;
 
-namespace Scrabble.Models.Player
+namespace Scrabble.Models
 {
     public class Player : INotifyPropertyChanged
     {
         public Player(IContainer ioc)
         {
             Color = Color.Aqua;
-            Rack = new RackViewModel();
+            Rack = ioc.Get<RackViewModel>();
+            Rack.AddPlayer(this);
             Rack.Orientation = Orientation.Horizontal;
-            Rack.Tiles.AddRange(new[]
-            {
-                ioc.Get<RackTile>(),
-                ioc.Get<RackTile>(),
-                ioc.Get<RackTile>(),
-                ioc.Get<RackTile>(),
-                ioc.Get<RackTile>(),
-                ioc.Get<RackTile>(),
-                ioc.Get<RackTile>()
-            });
         }
 
         public int Score { get; set; }

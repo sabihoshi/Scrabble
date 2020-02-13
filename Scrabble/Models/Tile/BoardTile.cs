@@ -19,7 +19,7 @@ namespace Scrabble.Models.Tile
 
         public int WordMultiplier { get; set; }
 
-        public Player.Player PlacedBy { get; set; }
+        public Player PlacedBy { get; set; }
 
         public bool HasLetter => string.IsNullOrWhiteSpace(TileBase.PlacedLetter.Character.ToString());
 
