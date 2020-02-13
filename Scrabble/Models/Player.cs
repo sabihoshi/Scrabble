@@ -3,25 +3,26 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using Scrabble.ViewModels;
+using IContainer = StyletIoC.IContainer;
 
 namespace Scrabble.Models
 {
     public class Player : INotifyPropertyChanged
     {
-        public Player()
+        public Player(IContainer ioc)
         {
             Color = Color.Aqua;
             Rack = new RackViewModel();
             Rack.Orientation = Orientation.Horizontal;
             Rack.Tiles.AddRange(new []
             {
-                new RackTile(), 
-                new RackTile(), 
-                new RackTile(), 
-                new RackTile(), 
-                new RackTile(), 
-                new RackTile(), 
-                new RackTile()
+                ioc.Get<RackTile>(), 
+                ioc.Get<RackTile>(), 
+                ioc.Get<RackTile>(), 
+                ioc.Get<RackTile>(), 
+                ioc.Get<RackTile>(), 
+                ioc.Get<RackTile>(), 
+                ioc.Get<RackTile>()
             });
         }
 

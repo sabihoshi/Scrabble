@@ -1,15 +1,19 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Scrabble.Models;
 using Stylet;
-using static Scrabble.ViewModels.BoardTile;
 using static Scrabble.Models.TileBase;
+using IContainer = StyletIoC.IContainer;
 
 namespace Scrabble.ViewModels
 {
     public class BoardViewModel : INotifyPropertyChanged
     {
+        private readonly IContainer _ioc;
+
+        public BoardViewModel(IContainer ioc) { _ioc = ioc; }
         public const int Size = 15;
 
         public ITile[][] Tiles { get; set; } = new ITile[Size][];
@@ -18,6 +22,22 @@ namespace Scrabble.ViewModels
             new BindableCollection<ITile>(Tiles.SelectMany(x => x));
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public BoardTile Create(Type? type = null)
+        {
+            var tile = type switch
+            {
+                Type.Blue     => new BoardTile("#90C2E5", 1, 2),
+                Type.DarkBlue => new BoardTile("#3187C2", 1, 2),
+                Type.Pink     => new BoardTile("#DB8298", 2, 1),
+                Type.Red      => new BoardTile("#B3172C", 2, 1),
+                Type.Star     => new BoardTile(Color.Yellow, 2, 1),
+                _             => new BoardTile(Color.White, 1, 1)
+            };
+            _ioc.BuildUp(tile);
+
+            return tile;
+        }
 
         public void ResetTiles()
         {

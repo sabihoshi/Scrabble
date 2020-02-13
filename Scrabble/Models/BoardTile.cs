@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using System.Drawing;
-using System.Runtime.CompilerServices;
+﻿using System.Drawing;
+using Scrabble.Events;
 using Scrabble.Models;
+using Stylet;
 
 namespace Scrabble.ViewModels
 {
@@ -28,17 +28,6 @@ namespace Scrabble.ViewModels
 
         public TileBase TileBase { get; }
 
-        public static BoardTile Create(Type? type = null)
-        {
-            return type switch
-            {
-                Type.Blue     => new BoardTile("#90C2E5", 1, 2),
-                Type.DarkBlue => new BoardTile("#3187C2", 1, 2),
-                Type.Pink     => new BoardTile("#DB8298", 2, 1),
-                Type.Red      => new BoardTile("#B3172C", 2, 1),
-                Type.Star     => new BoardTile(Color.Yellow, 2, 1),
-                _             => new BoardTile(Color.White, 1, 1)
-            };
-        }
+        public override void PublishEvent() { Aggregator.Publish(new TilePressedEvent<BoardTile>(this)); }
     }
 }
