@@ -13,8 +13,10 @@ namespace Scrabble.ViewModels
         : INotifyPropertyChanged, IHandle<TilePressedEvent<BoardTile>>, IHandle<TilePressedEvent<RackTile>>
     {
         private readonly IContainer _ioc;
-        private RackTile? _selectedRackTile;
-        private BoardTile? _selectedBoardTile;
+
+        private ITile? _selectedRackTile;
+
+        private ITile? _selectedBoardTile;
 
         public GameWindowViewModel(IEventAggregator eventAggregator, IContainer ioc)
         {
@@ -30,18 +32,6 @@ namespace Scrabble.ViewModels
 
         public BoardViewModel Board { get; set; }
 
-        public RackTile? SelectedRackTile
-        {
-            get => _selectedRackTile;
-            set => _selectedRackTile = _selectedRackTile == value ? null : value;
-        }
-
-        public BoardTile? SelectedBoardTile
-        {
-            get => _selectedBoardTile;
-            set => _selectedBoardTile = _selectedBoardTile == value ? null : value;
-        }
-
         public List<Player> Players { get; set; } = new List<Player>();
 
         public Player PlayerOne => HasPlayerOne ? Players[0] : null;
@@ -56,19 +46,39 @@ namespace Scrabble.ViewModels
 
         public void Handle(TilePressedEvent<BoardTile> message)
         {
-            SelectedBoardTile = (BoardTile?)message.TilePressed;
-            if (SelectedRackTile != null)
+            SelectTile(ref _selectedBoardTile, message.TilePressed);
+
+            if (_selectedRackTile != null)
                 PlaceTile();
         }
 
         public void Handle(TilePressedEvent<RackTile> message)
         {
-            SelectedRackTile = (RackTile?)message.TilePressed;
-            if (SelectedBoardTile != null)
+            SelectTile(ref _selectedRackTile, message.TilePressed);
+
+            if (_selectedBoardTile != null)
                 PlaceTile();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void DeselectTile(ref ITile? tile)
+        {
+            if (tile != null)
+                tile.IsHighlighted = false;
+            tile = null;
+        }
+
+        public void SelectTile(ref ITile? target, ITile selected)
+        {
+            if (target == selected)
+            {
+                DeselectTile(ref target);
+                return;
+            }
+            target = selected;
+            target.IsHighlighted = true;
+        }
 
         public void ConfirmMove() { }
 
@@ -76,14 +86,14 @@ namespace Scrabble.ViewModels
 
         public void PlaceTile()
         {
-            if (SelectedRackTile is null || SelectedBoardTile is null)
+            if (_selectedRackTile is null || _selectedBoardTile is null)
                 return;
 
-            SelectedBoardTile.PlacedLetter = SelectedRackTile.PlacedLetter;
-            SelectedRackTile.Player.Rack.Tiles.Remove(SelectedRackTile);
+            _selectedBoardTile.PlacedLetter = _selectedRackTile.PlacedLetter;
+            ((RackTile)_selectedRackTile).Player.Rack.Tiles.Remove(_selectedRackTile);
 
-            SelectedRackTile = null;
-            SelectedBoardTile = null;
+            DeselectTile(ref _selectedBoardTile);
+            DeselectTile(ref _selectedRackTile);
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

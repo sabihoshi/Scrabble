@@ -18,12 +18,12 @@
                         <Button Command="{s:Action PublishEvent}"
                                 s:View.ActionTarget="{Binding}"
                                 Content="{Binding PlacedLetter.Character}"
-                                Background="{DynamicResource DarkBrush}" Foreground="Black"
-                                BorderBrush="{DynamicResource DarkBrush}"
+                                Background="{DynamicResource Background}" Foreground="Black"
+                                BorderBrush="{DynamicResource Background}"
                                 Width="35" Height="35"
                                 Margin="5" Padding="5">
                             <Button.Resources>
-                                <SolidColorBrush x:Key="DarkBrush" Color="{Binding TileColor}" />
+                                <SolidColorBrush x:Key="Background" Color="{Binding TileColor}" />
                             </Button.Resources>
                         </Button>
                     </DataTemplate>

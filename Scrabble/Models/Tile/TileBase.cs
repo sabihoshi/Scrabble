@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using Stylet;
 using StyletIoC;
 
@@ -6,6 +7,8 @@ namespace Scrabble.Models.Tile
 {
     public abstract class TileBase : INotifyPropertyChanged, ITile
     {
+        private string _tileColor;
+
         public enum Type
         {
             Blue,
@@ -20,7 +23,13 @@ namespace Scrabble.Models.Tile
         [Inject]
         public IEventAggregator Aggregator { get; set; }
 
-        public string TileColor { get; set; }
+        public string TileColor
+        {
+            get => IsHighlighted ? Color.MediumAquamarine.Name :_tileColor;
+            set => _tileColor = value;
+        }
+
+        public bool IsHighlighted { get; set; }
 
         public Letter.Letter PlacedLetter { get; set; } = new Letter.Letter(' ', 0);
 

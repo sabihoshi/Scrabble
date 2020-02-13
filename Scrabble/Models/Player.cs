@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
-using Scrabble.Models.Tile;
 using Scrabble.ViewModels;
 using IContainer = StyletIoC.IContainer;
 

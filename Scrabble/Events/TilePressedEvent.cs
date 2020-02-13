@@ -2,10 +2,10 @@
 
 namespace Scrabble.Events
 {
-    public class TilePressedEvent<T> where T : TileBase
+    public class TilePressedEvent<T> where T : ITile
     {
-        public TilePressedEvent(TileBase tilePressed) => TilePressed = tilePressed;
+        public TilePressedEvent(ITile tilePressed) => TilePressed = tilePressed;
 
-        public TileBase TilePressed { get; set; }
+        public ITile TilePressed { get; set; }
     }
 }
