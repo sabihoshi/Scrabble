@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using Scrabble.Events;
+using Scrabble.Models.Letter;
 using Stylet;
-using StyletIoC;
 
-namespace Scrabble.Models
+namespace Scrabble.Models.Tile
 {
     public class RackTile : TileBase
     {

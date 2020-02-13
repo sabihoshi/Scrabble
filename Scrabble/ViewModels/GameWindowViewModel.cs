@@ -1,22 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.Tracing;
 using System.Runtime.CompilerServices;
 using Scrabble.Events;
-using Scrabble.Models;
+using Scrabble.Models.Player;
+using Scrabble.Models.Tile;
 using Stylet;
 using IContainer = StyletIoC.IContainer;
 
 namespace Scrabble.ViewModels
 {
-    public class GameWindowViewModel : INotifyPropertyChanged, IHandle<TilePressedEvent<BoardTile>>, IHandle<TilePressedEvent<RackTile>>
+    public class GameWindowViewModel
+        : INotifyPropertyChanged, IHandle<TilePressedEvent<BoardTile>>, IHandle<TilePressedEvent<RackTile>>
     {
         private readonly IContainer _ioc;
         private RackTile? _selectedRackTile;
         private BoardTile? _selectedBoardTile;
-        private Player CurrentPlayer { get; set; }
-
-        public BoardViewModel Board { get; set; }
 
         public GameWindowViewModel(IEventAggregator eventAggregator, IContainer ioc)
         {
@@ -27,6 +25,10 @@ namespace Scrabble.ViewModels
             Players.Add(ioc.Get<Player>());
             CurrentPlayer = PlayerOne;
         }
+
+        private Player CurrentPlayer { get; }
+
+        public BoardViewModel Board { get; set; }
 
         public RackTile? SelectedRackTile
         {
@@ -52,15 +54,25 @@ namespace Scrabble.ViewModels
         public bool HasPlayerThree => Players.Count >= 3;
         public bool HasPlayerFour => Players.Count >= 4;
 
-        public void ConfirmMove()
+        public void Handle(TilePressedEvent<BoardTile> message)
         {
-
+            SelectedBoardTile = (BoardTile?)message.TilePressed;
+            if (SelectedRackTile != null)
+                PlaceTile();
         }
 
-        public void CancelMove()
+        public void Handle(TilePressedEvent<RackTile> message)
         {
-
+            SelectedRackTile = (RackTile?)message.TilePressed;
+            if (SelectedBoardTile != null)
+                PlaceTile();
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void ConfirmMove() { }
+
+        public void CancelMove() { }
 
         public void PlaceTile()
         {
@@ -72,31 +84,9 @@ namespace Scrabble.ViewModels
             SelectedBoardTile = null;
         }
 
-        public void Handle(TilePressedEvent<BoardTile> message)
-        {
-            SelectedBoardTile = (BoardTile?)message.TilePressed;
-            if (SelectedRackTile != null)
-            {
-                PlaceTile();
-            }
-        }
-
-        public void Handle(TilePressedEvent<RackTile> message)
-        {
-            SelectedRackTile = (RackTile?)message.TilePressed;
-            if (SelectedBoardTile != null)
-            {
-                PlaceTile();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        
     }
 }

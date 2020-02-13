@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
-using Scrabble.Models;
+using Scrabble.Models.Player;
+using Scrabble.Models.Tile;
 using Stylet;
 
 namespace Scrabble.ViewModels

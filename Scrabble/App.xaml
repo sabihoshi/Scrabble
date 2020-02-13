@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Scrabble"
              xmlns:s="https://github.com/canton7/Stylet"
-             xmlns:models="clr-namespace:Scrabble.Models">
+             xmlns:models="clr-namespace:Scrabble.Models.Tile">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

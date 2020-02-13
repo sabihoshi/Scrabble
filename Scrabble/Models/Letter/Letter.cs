@@ -1,4 +1,4 @@
-﻿namespace Scrabble.Models
+﻿namespace Scrabble.Models.Letter
 {
     public class Letter
     {

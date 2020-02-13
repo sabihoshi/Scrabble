@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
 using Scrabble.Events;
-using Scrabble.Models;
 using Stylet;
 
-namespace Scrabble.ViewModels
+namespace Scrabble.Models.Tile
 {
     public class BoardTile : TileBase
     {
@@ -20,7 +19,7 @@ namespace Scrabble.ViewModels
 
         public int WordMultiplier { get; set; }
 
-        public Player PlacedBy { get; set; }
+        public Player.Player PlacedBy { get; set; }
 
         public bool HasLetter => string.IsNullOrWhiteSpace(TileBase.PlacedLetter.Character.ToString());
 

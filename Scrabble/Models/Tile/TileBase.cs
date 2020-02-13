@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel;
-using Scrabble.Events;
 using Stylet;
 using StyletIoC;
 
-namespace Scrabble.Models
+namespace Scrabble.Models.Tile
 {
     public abstract class TileBase : INotifyPropertyChanged, ITile
     {
@@ -16,14 +15,14 @@ namespace Scrabble.Models
             Star
         }
 
-        [Inject]
-        public IEventAggregator Aggregator { get; set;  }
-
         public TileBase(string tileColor) => TileColor = tileColor;
+
+        [Inject]
+        public IEventAggregator Aggregator { get; set; }
 
         public string TileColor { get; set; }
 
-        public Letter PlacedLetter { get; set; } = new Letter(' ', 0);
+        public Letter.Letter PlacedLetter { get; set; } = new Letter.Letter(' ', 0);
 
         public event PropertyChangedEventHandler PropertyChanged;
 

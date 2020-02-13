@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Scrabble.Extensions;
 
-namespace Scrabble.Models
+namespace Scrabble.Models.Letter
 {
     public static class LetterBag
     {
@@ -41,15 +41,13 @@ namespace Scrabble.Models
 
             void AddLetters(char letter, int amount, int points)
             {
-                for (int i = 0; i < amount; i++)
-                {
+                for (var i = 0; i < amount; i++)
                     AvailableLetters.Add(new Letter(letter, points));
-                }
             }
         }
 
-        public static Letter GetLetter() => AvailableLetters.Pop();
-
         public static List<Letter> AvailableLetters { get; set; } = new List<Letter>();
+
+        public static Letter GetLetter() => AvailableLetters.Pop();
     }
 }
