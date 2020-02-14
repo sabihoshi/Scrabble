@@ -27,11 +27,9 @@ namespace Scrabble.Models.Tile
 
         public Player PlacedBy { get; set; }
 
-        public bool HasLetter => string.IsNullOrWhiteSpace(TileBase.Letter.Character.ToString());
+        public bool HasLetter => !string.IsNullOrWhiteSpace(Letter?.Character.ToString());
 
         public Point Position { get; set; }
-
-        public TileBase TileBase { get; }
 
         public override void PublishEvent() { Aggregator.Publish(new TilePressedEvent<BoardTile>(this)); }
     }

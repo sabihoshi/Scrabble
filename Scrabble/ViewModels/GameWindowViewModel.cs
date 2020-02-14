@@ -100,12 +100,23 @@ namespace Scrabble.ViewModels
             var boardTile = (BoardTile)_selectedBoardTile;
             var rackTile = (RackTile)_selectedRackTile;
 
-            PlacedTiles.Add((boardTile, rackTile));
-            rackTile.Player.Rack.Tiles.Remove(_selectedRackTile);
+            // Check if there is a tile placed already
+            if (boardTile.HasLetter)
+            {
+                var temp = rackTile.Letter;
+                rackTile.Letter = boardTile.Letter;
+                boardTile.Letter = temp;
+            }
+            else
+            {
+                boardTile.Letter = rackTile.Letter;
+                boardTile.PlacedBy = CurrentPlayer;
 
-            boardTile.Letter = rackTile.Letter;
-            boardTile.PlacedBy = CurrentPlayer;
-
+                rackTile.Player.Rack.Tiles.Remove(_selectedRackTile);
+                PlacedTiles.Add((boardTile, rackTile));
+            }
+            
+            
             DeselectTile(ref _selectedBoardTile);
             DeselectTile(ref _selectedRackTile);
         }
