@@ -7,15 +7,6 @@ namespace Scrabble.Models.Tile
 {
     public abstract class TileBase : INotifyPropertyChanged, ITile
     {
-        public enum Type
-        {
-            Blue,
-            DarkBlue,
-            Pink,
-            Red,
-            Star
-        }
-
         private string _tileColor;
 
         public TileBase(string tileColor) => TileColor = tileColor;

@@ -6,6 +6,15 @@ namespace Scrabble.Models.Tile
 {
     public class BoardTile : TileBase
     {
+        public enum Type
+        {
+            Blue,
+            DarkBlue,
+            Pink,
+            Red,
+            Star
+        }
+
         public BoardTile(string tileColor, int letterMultiplier, int wordMultiplier) : base(tileColor)
         {
             LetterMultiplier = letterMultiplier;

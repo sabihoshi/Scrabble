@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Scrabble.Models.Tile;
 using Stylet;
-using static Scrabble.Models.Tile.TileBase;
+using static Scrabble.Models.Tile.BoardTile;
 using IContainer = StyletIoC.IContainer;
 
 namespace Scrabble.ViewModels
@@ -22,9 +22,9 @@ namespace Scrabble.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public BoardTile Create(Type? type = null)
+        public ITile Create(Type? type = null)
         {
-            BoardTile tile = type switch
+            ITile tile = type switch
             {
                 Type.Blue     => new BoardTile("#90C2E5", 1, 2),
                 Type.DarkBlue => new BoardTile("#3187C2", 1, 2),
