@@ -35,7 +35,10 @@
 
         <Grid Column="3" 
               Row="0" RowSpan="3">
-            <Button Command="{s:Action CancelMove}">Reset</Button>
+            <StackPanel>
+                <Button Command="{s:Action CancelMove}">Reset</Button>
+                <Button Command="{s:Action ConfirmMove}">Confirm</Button>
+            </StackPanel>
         </Grid>
 
         <!-- Players -->

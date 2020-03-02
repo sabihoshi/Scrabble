@@ -22,6 +22,8 @@ namespace Scrabble.Models.Tile
             set => _tileColor = value;
         }
 
+        public bool IsEnabled { get; set; } = false;
+
         public bool IsHighlighted { get; set; }
 
         public Letter.Letter Letter { get; set; }

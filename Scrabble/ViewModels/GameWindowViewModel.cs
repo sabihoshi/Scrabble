@@ -25,6 +25,7 @@ namespace Scrabble.ViewModels
             eventAggregator.Subscribe(this);
             Board.ResetTiles();
             Players.Add(ioc.Get<Player>());
+            Players.First().Rack.ToggleRack(true);
             CurrentPlayer = PlayerOne;
         }
 
@@ -87,7 +88,13 @@ namespace Scrabble.ViewModels
             target.IsHighlighted = true;
         }
 
-        public void ConfirmMove() { }
+        public void ConfirmMove()
+        {
+            foreach (var tile in PlacedTiles)
+            {
+
+            }
+        }
 
         public void CancelMove()
         {

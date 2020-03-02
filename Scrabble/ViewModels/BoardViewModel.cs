@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 using Scrabble.Models.Tile;
 using Stylet;
 using static Scrabble.Models.Tile.BoardTile;
@@ -324,6 +326,34 @@ namespace Scrabble.ViewModels
                 Create(),
                 Create(Type.Red)
             };
+
+            Tiles[Size / 2][Size / 2].IsEnabled = true;
+        }
+
+        public void ToggleTiles(Orientation orientation, int index, bool? toggle = null)
+        {
+            foreach (var point in GetPoints(orientation, index))
+            {
+                var tile = Tiles[point.Y][point.X];
+                tile.IsEnabled = toggle ?? !tile.IsEnabled;
+            }
+        }
+
+        public IEnumerable<Point> GetPoints(Orientation orientation, int index)
+        {        
+            for (int i = 0; i < Size; i++)
+            {
+                yield return orientation switch
+                {
+                    Orientation.Horizontal => new Point(i, index),
+                    Orientation.Vertical => new Point(index, i)
+                };
+            }
+        }
+
+        public void ToggleTiles(ITile[] tiles, bool? toggle = null)
+        {
+            foreach (var tile in tiles) { tile.IsEnabled = toggle ?? !tile.IsEnabled; }
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

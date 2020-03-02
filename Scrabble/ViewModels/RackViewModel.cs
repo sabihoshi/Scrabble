@@ -19,10 +19,16 @@ namespace Scrabble.ViewModels
 
         public Orientation Orientation { get; set; }
 
+        public void ToggleRack(bool? toggle = null)
+        {
+            foreach (var rack in Tiles)
+                rack.IsEnabled = toggle ?? !rack.IsEnabled;
+        }
+
         public void AddPlayer(Player player)
         {
             Player = player;
-            for (var i = 0; i < MaxSize; i++)
+            for (int i = 0; i < MaxSize; i++)
             {
                 var tile = new RackTile(player);
                 Tiles.Add(tile);

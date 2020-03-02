@@ -20,6 +20,7 @@
                                 Content="{Binding Letter.Character}"
                                 Background="{DynamicResource Background}" Foreground="Black"
                                 BorderBrush="{DynamicResource Background}"
+                                IsEnabled="{Binding IsEnabled}"
                                 Width="35" Height="35"
                                 Margin="5" Padding="5">
                             <Button.Resources>

@@ -7,5 +7,7 @@
         Letter.Letter Letter { get; set; }
 
         public bool IsHighlighted { get; set; }
+
+        public bool IsEnabled { get; set; }
     }
 }
