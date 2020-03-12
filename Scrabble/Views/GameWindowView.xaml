@@ -33,7 +33,7 @@
                             VerticalAlignment="Stretch" />
         </Viewbox>
 
-        <Grid Column="3" 
+        <Grid Column="3" VerticalAlignment="Center"
               Row="0" RowSpan="3">
             <StackPanel>
                 <Button Command="{s:Action CancelMove}">Reset</Button>
@@ -43,31 +43,19 @@
 
         <!-- Players -->
         <Viewbox Grid.Row="0" Grid.Column="1">
-            <ContentControl
-                s:View.Model="{Binding PlayerOne.Rack}"
-                Visibility="{Binding HasPlayerOne, 
-                Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ContentControl s:View.Model="{Binding Players[0].Rack}" />
         </Viewbox>
 
         <Viewbox Grid.Row="2" Grid.Column="1">
-            <ContentControl
-                s:View.Model="{Binding PlayerTwo.Rack}"
-                Visibility="{Binding HasPlayerTwo, 
-            Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ContentControl s:View.Model="{Binding Players[1].Rack}"/>
         </Viewbox>
 
         <Viewbox Grid.Row="1" Grid.Column="0">
-            <ContentControl
-                s:View.Model="{Binding PlayerThree.Rack}"
-                Visibility="{Binding HasPlayerThree, 
-            Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ContentControl s:View.Model="{Binding Players[2].Rack}" />
         </Viewbox>
 
         <Viewbox Grid.Row="1" Grid.Column="2">
-            <ContentControl
-                s:View.Model="{Binding PlayerFour.Rack}"
-                Visibility="{Binding HasPlayerFour, 
-                Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <ContentControl s:View.Model="{Binding Players[3].Rack}" />
         </Viewbox>
 
         <Grid.Resources>

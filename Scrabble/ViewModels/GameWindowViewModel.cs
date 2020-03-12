@@ -11,7 +11,7 @@ using IContainer = StyletIoC.IContainer;
 
 namespace Scrabble.ViewModels
 {
-    public class GameWindowViewModel : INotifyPropertyChanged, 
+    public class GameWindowViewModel : Screen, 
         IHandle<TilePressedEvent<BoardTile>>, 
         IHandle<TilePressedEvent<RackTile>>
     {
@@ -24,9 +24,10 @@ namespace Scrabble.ViewModels
             Board = ioc.Get<BoardViewModel>();
             eventAggregator.Subscribe(this);
             Board.ResetTiles();
+
             Players.Add(ioc.Get<Player>());
             Players.First().Rack.ToggleRack(true);
-            CurrentPlayer = PlayerOne;
+            CurrentPlayer = Players.First();
         }
 
         private Player CurrentPlayer { get; }
@@ -36,16 +37,6 @@ namespace Scrabble.ViewModels
         public List<(BoardTile boardTile, RackTile rackTile)> PlacedTiles { get; set; } = new List<(BoardTile, RackTile)>();
 
         public List<Player> Players { get; set; } = new List<Player>();
-
-        public Player PlayerOne => HasPlayerOne ? Players[0] : null;
-        public Player PlayerTwo => HasPlayerTwo ? Players[1] : null;
-        public Player PlayerThree => HasPlayerThree ? Players[2] : null;
-        public Player PlayerFour => HasPlayerFour ? Players[3] : null;
-
-        public bool HasPlayerOne => Players.Count >= 1;
-        public bool HasPlayerTwo => Players.Count >= 2;
-        public bool HasPlayerThree => Players.Count >= 3;
-        public bool HasPlayerFour => Players.Count >= 4;
 
         public void Handle(TilePressedEvent<BoardTile> message)
         {
@@ -62,8 +53,6 @@ namespace Scrabble.ViewModels
             if (_selectedBoardTile != null)
                 PlaceTile();
         } 
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void DeselectTile(ref ITile? tile)
         {
@@ -142,11 +131,6 @@ namespace Scrabble.ViewModels
             var original = 
                 PlacedTiles.Single(x => x.boardTile == boardTile);
             PlacedTiles.Remove(original);
-        }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

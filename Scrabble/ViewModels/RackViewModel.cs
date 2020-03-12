@@ -1,14 +1,17 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using Scrabble.Models;
 using Scrabble.Models.Tile;
 using Stylet;
+using Stylet.Xaml;
 using StyletIoC;
 
 namespace Scrabble.ViewModels
 {
     public class RackViewModel
     {
-        public const int MaxSize = 7;
+        private const int MaxSize = 7;
+
         private readonly IContainer _ioc;
 
         public RackViewModel(IContainer ioc) => _ioc = ioc;
