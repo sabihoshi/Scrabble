@@ -368,6 +368,9 @@ namespace Scrabble.ViewModels
 
             foreach (var tile in Tiles.SelectMany(t => t))
             {
+                if (!tile.HasLetter)
+                    continue;
+
                 foreach (var adjacent in GetAdjacentTiles(tile.Position))
                 {
                     if (!adjacent.HasLetter)
@@ -376,7 +379,7 @@ namespace Scrabble.ViewModels
             }
         }
 
-        public IEnumerable<BoardTile> GetAdjacentTiles(Point index)
+        private IEnumerable<BoardTile> GetAdjacentTiles(Point index)
         {
             foreach (var position in _adjacentPositions)
             {

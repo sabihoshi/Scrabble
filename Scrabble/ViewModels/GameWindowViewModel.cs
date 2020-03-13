@@ -76,7 +76,9 @@ namespace Scrabble.ViewModels
 
         public void ConfirmMove()
         {
-            foreach (var tile in PlacedTiles) { }
+            // Todo: validate move and switch players
+
+            Move();
         }
 
         public void CancelMove()
@@ -87,6 +89,11 @@ namespace Scrabble.ViewModels
                 rackTile.Player.Rack.Tiles.Add(rackTile);
                 boardTile.Reset();
             }
+            Move();
+        }
+
+        private void Move()
+        {
             PlacedTiles.Clear();
             Board.EnableAdjacentTiles();
         }
