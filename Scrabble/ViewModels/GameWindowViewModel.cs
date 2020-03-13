@@ -79,13 +79,14 @@ namespace Scrabble.ViewModels
 
         public void CancelMove()
         {
-            foreach (var tile in PlacedTiles)
+            foreach (var (boardTile, rackTile) in PlacedTiles)
             {
-                tile.rackTile.Letter = tile.boardTile.Letter;
-                tile.rackTile.Player.Rack.Tiles.Add(tile.rackTile);
-                tile.boardTile.Reset();
+                rackTile.Letter = boardTile.Letter;
+                rackTile.Player.Rack.Tiles.Add(rackTile);
+                boardTile.Reset();
             }
             PlacedTiles.Clear();
+            Board.EnableAdjacentTiles();
         }
 
         public void TilePlacement()

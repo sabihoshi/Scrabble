@@ -26,6 +26,8 @@ namespace Scrabble.Models.Tile
 
         public bool IsHighlighted { get; set; }
 
+        public Point Position { get; set; }
+
         public Letter.Letter Letter { get; set; }
 
         public abstract void PublishEvent();
