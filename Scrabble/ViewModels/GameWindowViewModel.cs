@@ -95,11 +95,9 @@ namespace Scrabble.ViewModels
 
             // Check if there is a tile placed already
             if (boardTile.HasLetter)
-                SwapTile(rackTile, boardTile);
+                SwapTile(boardTile, rackTile);
             else
                 PlayerTilePlacement(boardTile, rackTile);
-
-            PlacedTiles.Add((boardTile, rackTile));
 
             DeselectTile(ref _selectedBoardTile);
             DeselectTile(ref _selectedRackTile);
@@ -113,15 +111,14 @@ namespace Scrabble.ViewModels
             rackTile.Player.Rack.Tiles.Remove(_selectedRackTile);
         }
 
-        private void SwapTile(RackTile rackTile, BoardTile boardTile)
+        private void SwapTile(BoardTile boardTile, RackTile rackTile)
         {
-            var temp = rackTile.Letter;
-            rackTile.Letter = boardTile.Letter;
-            boardTile.Letter = temp;
-
-            var original =
-                PlacedTiles.Single(x => x.boardTile == boardTile);
-            PlacedTiles.Remove(original);
+            (rackTile.Letter, boardTile.Letter) = (boardTile.Letter, rackTile.Letter);
         }
+
+        public Orientation DetermineOrientation(Point first, Point second) =>
+            first.Equals(second) ? Orientation.Both :
+            first.X == second.X  ? Orientation.Horizontal :
+            first.Y == second.Y  ? Orientation.Vertical :
     }
 }
