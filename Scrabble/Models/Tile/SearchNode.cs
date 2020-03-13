@@ -20,6 +20,7 @@ namespace Scrabble.Models.Tile
         public enum Orientation
         {
             None,
+            Both,
             Vertical,
             Horizontal
         }

@@ -355,10 +355,7 @@ namespace Scrabble.ViewModels
         /// </summary>
         public void EnableAdjacentTiles()
         {
-            foreach (var tiles in Tiles)
-            {
-                ToggleTiles(tiles, false);
-            }
+            ToggleAllTiles(false);
 
             var letterCount = Tiles.SelectMany(t => t)
                .Count(t => t.HasLetter);
@@ -406,14 +403,27 @@ namespace Scrabble.ViewModels
             }
         }
 
-        public IEnumerable<Point> GetPoints(Orientation orientation, int index)
-        {        
+        public IEnumerable<Point> GetPoints(Orientation orientation, Point index)
+        {
+            return orientation switch
+            {
+                Orientation.Both =>
+                           GeneratePoints(Orientation.Horizontal, index)
+                   .Concat(GeneratePoints(Orientation.Vertical, index)),
+                Orientation.Horizontal => GeneratePoints(Orientation.Horizontal, index),
+                Orientation.Vertical   => GeneratePoints(Orientation.Vertical, index),
+                _                      => Enumerable.Empty<Point>()
+            };
+        } 
+
+        private IEnumerable<Point> GeneratePoints(Orientation orientation, Point index)
+        {
             for (int i = 0; i < Size; i++)
             {
                 yield return orientation switch
                 {
-                    Orientation.Horizontal => new Point(i, index),
-                    Orientation.Vertical => new Point(index, i)
+                    Orientation.Horizontal => new Point(i, index.Y),
+                    Orientation.Vertical   => new Point(index.X, i)
                 };
             }
         }
@@ -422,6 +432,14 @@ namespace Scrabble.ViewModels
         {
             foreach (var tile in tiles)
                 tile.IsEnabled = toggle ?? !tile.IsEnabled;
+        }
+
+        public void ToggleAllTiles(bool? toggle = null)
+        {
+            foreach (var tiles in Tiles)
+            {
+                ToggleTiles(tiles, toggle);
+            }
         }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

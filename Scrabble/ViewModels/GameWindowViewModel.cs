@@ -1,17 +1,19 @@
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Scrabble.Events;
 using Scrabble.Models;
 using Scrabble.Models.Tile;
 using Stylet;
 using StyletIoC;
+using static Scrabble.Models.Tile.SearchNode;
 
 namespace Scrabble.ViewModels
 {
-    public class GameWindowViewModel : Screen, 
-        IHandle<TilePressedEvent<BoardTile>>,
-        IHandle<TilePressedEvent<RackTile>>
+    public class GameWindowViewModel
+        : Screen,
+            IHandle<TilePressedEvent<BoardTile>>,
+            IHandle<TilePressedEvent<RackTile>>
     {
         private ITile? _selectedBoardTile;
 
@@ -110,6 +112,20 @@ namespace Scrabble.ViewModels
             boardTile.PlacedBy = CurrentPlayer;
 
             rackTile.Player.Rack.Tiles.Remove(_selectedRackTile);
+            
+            if (PlacedTiles.Count == 0)
+                Board.ToggleTiles(Orientation.Both, boardTile.Position, true);
+            else if (PlacedTiles.Count == 1)
+            {
+                var first = PlacedTiles[0].boardTile.Position;
+                var second = boardTile.Position;
+                var orientation = DetermineOrientation(first, second);
+
+                Board.ToggleAllTiles(false);
+                Board.ToggleTiles(orientation, first, true);
+            }
+
+            PlacedTiles.Add((boardTile, rackTile));
         }
 
         private void SwapTile(BoardTile boardTile, RackTile rackTile)
@@ -119,7 +135,8 @@ namespace Scrabble.ViewModels
 
         public Orientation DetermineOrientation(Point first, Point second) =>
             first.Equals(second) ? Orientation.Both :
-            first.X == second.X  ? Orientation.Horizontal :
-            first.Y == second.Y  ? Orientation.Vertical :
+            first.X == second.X  ? Orientation.Vertical :
+            first.Y == second.Y  ? Orientation.Horizontal :
+                                   Orientation.None;
     }
 }
