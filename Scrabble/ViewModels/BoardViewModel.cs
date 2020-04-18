@@ -25,14 +25,14 @@ namespace Scrabble.ViewModels
 
         public BoardTile Create(Type? type = null)
         {
-            BoardTile tile = type switch
+            var tile = type switch
             {
-                Type.Blue     => new BoardTile("#90C2E5", 1, 2),
+                Type.Blue => new BoardTile("#90C2E5", 1, 2),
                 Type.DarkBlue => new BoardTile("#3187C2", 1, 2),
-                Type.Pink     => new BoardTile("#DB8298", 2, 1),
-                Type.Red      => new BoardTile("#B3172C", 2, 1),
-                Type.Star     => new BoardTile(Color.Yellow, 2, 1),
-                _             => new BoardTile(Color.White, 1, 1)
+                Type.Pink => new BoardTile("#DB8298", 2, 1),
+                Type.Red => new BoardTile("#B3172C", 2, 1),
+                Type.Star => new BoardTile(Color.Yellow, 2, 1),
+                _ => new BoardTile(Color.White, 1, 1)
             };
             _ioc.BuildUp(tile);
 
@@ -328,28 +328,22 @@ namespace Scrabble.ViewModels
 
             // Make sure player can place first tile in the middle
             Tiles[Size / 2][Size / 2].IsEnabled = true;
-            
-            for (int y = 0; y < Tiles.Length; y++)
+
+            for (var y = 0; y < Tiles.Length; y++)
             {
-                for (int x = 0; x < Tiles[y].Length; x++)
-                {
-                    Tiles[y][x].Position = new Point(x, y);
-                }
+                for (var x = 0; x < Tiles[y].Length; x++) Tiles[y][x].Position = new Point(x, y);
             }
         }
 
         /// <summary>
-        /// This will enable tiles that have a letter adjacent to them
+        ///     This will enable tiles that have a letter adjacent to them
         /// </summary>
         public void EnableAdjacentTiles()
         {
-            foreach (var tiles in Tiles)
-            {
-                tiles.ToggleTiles(false);
-            }
+            foreach (var tiles in Tiles) tiles.ToggleTiles(false);
 
             var letterCount = Tiles.SelectMany(t => t)
-               .Count(t => t.HasLetter);
+                .Count(t => t.HasLetter);
 
             if (letterCount == 0)
             {

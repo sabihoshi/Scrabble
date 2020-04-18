@@ -11,10 +11,7 @@ namespace Scrabble.Models.Tile
 
         public TileBase(string tileColor) => TileColor = tileColor;
 
-        [Inject]
-        public IEventAggregator Aggregator { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        [Inject] public IEventAggregator Aggregator { get; set; }
 
         public string TileColor
         {
@@ -29,6 +26,8 @@ namespace Scrabble.Models.Tile
         public Point Position { get; set; }
 
         public Letter.Letter Letter { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public abstract void PublishEvent();
     }

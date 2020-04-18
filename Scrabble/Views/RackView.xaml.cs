@@ -7,6 +7,9 @@ namespace Scrabble.Views
     /// </summary>
     public partial class RackView : UserControl
     {
-        public RackView() { InitializeComponent(); }
+        public RackView()
+        {
+            InitializeComponent();
+        }
     }
 }

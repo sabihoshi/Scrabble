@@ -7,6 +7,9 @@ namespace Scrabble.Views
     /// </summary>
     public partial class BoardView : UserControl
     {
-        public BoardView() { InitializeComponent(); }
+        public BoardView()
+        {
+            InitializeComponent();
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace Scrabble.Models.Tile
         public Point End { get; set; }
 
         public SearchNode InverseNode(Point start) =>
-            new SearchNode((BoardTile)BoardViewModel.Tiles[start.Y][start.X], BoardViewModel,
+            new SearchNode(BoardViewModel.Tiles[start.Y][start.X], BoardViewModel,
                 Inverse(SearchOrientation));
 
         public void Search()
@@ -64,8 +64,8 @@ namespace Scrabble.Models.Tile
 
         public Point Seek(Direction direction)
         {
-            Point result = Origin.Position;
-            foreach (Point position in SearchGenerator(direction))
+            var result = Origin.Position;
+            foreach (var position in SearchGenerator(direction))
             {
                 if (!Nodes.Any(n => n.Origin.Position == position && n.SearchOrientation == Inverse(SearchOrientation)))
                     Nodes.Add(InverseNode(position));
@@ -89,23 +89,23 @@ namespace Scrabble.Models.Tile
             switch (direction)
             {
                 case Direction.Up:
-                    for (int i = Origin.Position.Y - 1; i >= 0; i--)
+                    for (var i = Origin.Position.Y - 1; i >= 0; i--)
                         yield return new Point(Origin.Position.X, i);
 
                     break;
                 case Direction.Down:
-                    for (int i = Origin.Position.Y + 1; i < BoardViewModel.Size; i++)
+                    for (var i = Origin.Position.Y + 1; i < BoardViewModel.Size; i++)
                         yield return new Point(Origin.Position.X, i);
 
                     break;
                 case Direction.Left:
-                    for (int i = Origin.Position.X - 1; i >= 0; i--)
+                    for (var i = Origin.Position.X - 1; i >= 0; i--)
                         yield return new Point(i, Origin.Position.Y);
 
                     break;
 
                 case Direction.Right:
-                    for (int i = Origin.Position.X + 1; i < BoardViewModel.Size; i++)
+                    for (var i = Origin.Position.X + 1; i < BoardViewModel.Size; i++)
                         yield return new Point(i, Origin.Position.Y);
 
                     break;

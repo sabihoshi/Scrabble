@@ -24,12 +24,6 @@ namespace Scrabble.Models.Tile
         public BoardTile(Color color, int letterMultiplier, int wordMultiplier) : this(color.Name,
             letterMultiplier, wordMultiplier) { }
 
-        public void Reset()
-        {
-            PlacedBy = null;
-            Letter = null;
-        }
-
         public int LetterMultiplier { get; set; }
 
         public int WordMultiplier { get; set; }
@@ -40,6 +34,15 @@ namespace Scrabble.Models.Tile
 
         public Point Position { get; set; }
 
-        public override void PublishEvent() { Aggregator.Publish(new TilePressedEvent<BoardTile>(this)); }
+        public void Reset()
+        {
+            PlacedBy = null;
+            Letter = null;
+        }
+
+        public override void PublishEvent()
+        {
+            Aggregator.Publish(new TilePressedEvent<BoardTile>(this));
+        }
     }
 }

@@ -8,6 +8,18 @@ namespace Scrabble.ViewModels
 {
     internal static class TileExtensions
     {
+        private static readonly Point[] AdjacentPositions =
+        {
+            new Point(-1, -1),
+            new Point(-1, 0),
+            new Point(-1, 1),
+            new Point(0, -1),
+            new Point(0, 1),
+            new Point(1, -1),
+            new Point(1, 0),
+            new Point(1, 1)
+        };
+
         public static void ToggleTiles(this IEnumerable<ITile> tiles, bool? toggle = null)
         {
             foreach (var tile in tiles)
@@ -19,19 +31,8 @@ namespace Scrabble.ViewModels
             tiles.SelectMany(t => t).ToggleTiles(toggle);
         }
 
-        private static readonly Point[] AdjacentPositions =
-        {
-            new Point(-1,-1),
-            new Point(-1,0),
-            new Point(-1,1),
-            new Point(0,-1),
-            new Point(0,1),
-            new Point(1,-1),
-            new Point(1,0),
-            new Point(1,1)
-        };
-
-        public static IEnumerable<BoardTile> GetAdjacentTiles(this BoardTile[][] boardTiles, Point index, IReadOnlyList<BoardTile[]> tiles)
+        public static IEnumerable<BoardTile> GetAdjacentTiles(this BoardTile[][] boardTiles, Point index,
+            IReadOnlyList<BoardTile[]> tiles)
         {
             foreach (var position in AdjacentPositions)
             {
@@ -54,21 +55,21 @@ namespace Scrabble.ViewModels
             return orientation switch
             {
                 Orientation.Both =>
-                GeneratePoints(Orientation.Horizontal, index).Concat<Point>(GeneratePoints(Orientation.Vertical, index)),
+                GeneratePoints(Orientation.Horizontal, index).Concat(GeneratePoints(Orientation.Vertical, index)),
                 Orientation.Horizontal => GeneratePoints(Orientation.Horizontal, index),
-                Orientation.Vertical   => GeneratePoints(Orientation.Vertical, index),
-                _                      => Enumerable.Empty<Point>()
+                Orientation.Vertical => GeneratePoints(Orientation.Vertical, index),
+                _ => Enumerable.Empty<Point>()
             };
         }
 
         private static IEnumerable<Point> GeneratePoints(this Orientation orientation, Point index)
         {
-            for (int i = 0; i < BoardViewModel.Size; i++)
+            for (var i = 0; i < BoardViewModel.Size; i++)
             {
                 yield return orientation switch
                 {
                     Orientation.Horizontal => new Point(i, index.Y),
-                    Orientation.Vertical   => new Point(index.X, i)
+                    Orientation.Vertical => new Point(index.X, i)
                 };
             }
         }

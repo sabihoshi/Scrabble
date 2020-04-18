@@ -25,9 +25,9 @@ namespace Scrabble.Models
 
         public RackViewModel Rack { get; }
 
-        public void AddTile(RackTile rack) => Rack.Tiles.Add(rack);
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public void AddTile(RackTile rack) => Rack.Tiles.Add(rack);
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

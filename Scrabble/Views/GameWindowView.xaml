@@ -53,7 +53,7 @@
         </Viewbox>
 
         <Viewbox Grid.Row="2" Grid.Column="1">
-            <ContentControl s:View.Model="{Binding Players[1].Rack}"/>
+            <ContentControl s:View.Model="{Binding Players[1].Rack}" />
         </Viewbox>
 
         <Viewbox Grid.Row="1" Grid.Column="0">

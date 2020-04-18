@@ -19,6 +19,9 @@ namespace Scrabble.Models.Tile
 
         public Color ForegroundColor { get; set; }
 
-        public override void PublishEvent() { Aggregator.Publish(new TilePressedEvent<RackTile>(this)); }
+        public override void PublishEvent()
+        {
+            Aggregator.Publish(new TilePressedEvent<RackTile>(this));
+        }
     }
 }

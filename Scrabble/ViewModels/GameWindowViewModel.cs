@@ -31,7 +31,7 @@ namespace Scrabble.ViewModels
             CurrentPlayer = Players.First();
         }
 
-        private Player CurrentPlayer { get; set;  }
+        private Player CurrentPlayer { get; set; }
 
         public BoardViewModel Board { get; set; }
 
@@ -92,6 +92,7 @@ namespace Scrabble.ViewModels
                 rackTile.Player.AddTile(rackTile);
                 boardTile.Reset();
             }
+
             Board.EnableAdjacentTiles();
             PlacedTiles.Clear();
         }
@@ -105,8 +106,8 @@ namespace Scrabble.ViewModels
 
         public void TilePlacement()
         {
-            var boardTile = (BoardTile)_selectedBoardTile!;
-            var rackTile = (RackTile)_selectedRackTile!;
+            var boardTile = (BoardTile) _selectedBoardTile!;
+            var rackTile = (RackTile) _selectedRackTile!;
 
             // Check if there is a tile placed already
             if (boardTile.HasLetter)
@@ -145,11 +146,11 @@ namespace Scrabble.ViewModels
                 .SelectMany(t => t)
                 .Where(t => t.HasLetter)
                 .ToggleTiles(false);
-            
+
             // Re-enable placed tiles
             PlacedTiles.Add((boardTile, rackTile));
             PlacedTiles.Select(t => t.boardTile)
-                       .ToggleTiles(true);
+                .ToggleTiles(true);
         }
 
         private static void SwapTile(BoardTile boardTile, RackTile rackTile)

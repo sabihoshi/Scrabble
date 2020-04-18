@@ -7,6 +7,9 @@ namespace Scrabble.Views
     /// </summary>
     public partial class GameWindowView : Window
     {
-        public GameWindowView() { InitializeComponent(); }
+        public GameWindowView()
+        {
+            InitializeComponent();
+        }
     }
 }
