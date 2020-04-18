@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -15,17 +14,6 @@ namespace Scrabble.ViewModels
     {
         public const int Size = 15;
         private readonly IContainer _ioc;
-        private readonly Point[] _adjacentPositions = new[]
-        {
-            new Point(-1,-1),
-            new Point(-1,0),
-            new Point(-1,1),
-            new Point(0,-1),
-            new Point(0,1),
-            new Point(1,-1),
-            new Point(1,0),
-            new Point(1,1)
-        };
 
         public BoardViewModel(IContainer ioc) => _ioc = ioc;
 
@@ -355,7 +343,10 @@ namespace Scrabble.ViewModels
         /// </summary>
         public void EnableAdjacentTiles()
         {
-            ToggleAllTiles(false);
+            foreach (var tiles in Tiles)
+            {
+                tiles.ToggleTiles(false);
+            }
 
             var letterCount = Tiles.SelectMany(t => t)
                .Count(t => t.HasLetter);
@@ -371,7 +362,7 @@ namespace Scrabble.ViewModels
                 if (!tile.HasLetter)
                     continue;
 
-                foreach (var adjacent in GetAdjacentTiles(tile.Position))
+                foreach (var adjacent in Tiles.GetAdjacentTiles(tile.Position, Tiles))
                 {
                     if (!adjacent.HasLetter)
                         adjacent.IsEnabled = true;
@@ -379,69 +370,12 @@ namespace Scrabble.ViewModels
             }
         }
 
-        private IEnumerable<BoardTile> GetAdjacentTiles(Point index)
-        {
-            foreach (var position in _adjacentPositions)
-            {
-                // Get the adjacent position of the current tile
-                var x = index.X + position.X;
-                var y = index.Y + position.Y;
-
-                if (x < 0 || x > Size - 1)
-                    continue;
-                if (y < 0 || y > Size - 1)
-                    continue;
-
-                if (!Tiles[y][x].HasLetter)
-                    yield return Tiles[y][x];
-            }
-        }
-
         public void ToggleTiles(Orientation orientation, Point index, bool? toggle = null)
         {
-            foreach (var point in GetPoints(orientation, index))
+            foreach (var point in orientation.GetPoints(index))
             {
                 var tile = Tiles[point.Y][point.X];
                 tile.IsEnabled = toggle ?? !tile.IsEnabled;
-            }
-        }
-
-        public IEnumerable<Point> GetPoints(Orientation orientation, Point index)
-        {
-            return orientation switch
-            {
-                Orientation.Both =>
-                           GeneratePoints(Orientation.Horizontal, index)
-                   .Concat(GeneratePoints(Orientation.Vertical, index)),
-                Orientation.Horizontal => GeneratePoints(Orientation.Horizontal, index),
-                Orientation.Vertical   => GeneratePoints(Orientation.Vertical, index),
-                _                      => Enumerable.Empty<Point>()
-            };
-        } 
-
-        private IEnumerable<Point> GeneratePoints(Orientation orientation, Point index)
-        {
-            for (int i = 0; i < Size; i++)
-            {
-                yield return orientation switch
-                {
-                    Orientation.Horizontal => new Point(i, index.Y),
-                    Orientation.Vertical   => new Point(index.X, i)
-                };
-            }
-        }
-
-        public void ToggleTiles(IEnumerable<ITile> tiles, bool? toggle = null)
-        {
-            foreach (var tile in tiles)
-                tile.IsEnabled = toggle ?? !tile.IsEnabled;
-        }
-
-        public void ToggleAllTiles(bool? toggle = null)
-        {
-            foreach (var tiles in Tiles)
-            {
-                ToggleTiles(tiles, toggle);
             }
         }
 

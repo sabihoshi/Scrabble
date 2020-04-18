@@ -14,7 +14,12 @@ namespace Scrabble.ViewModels
 
         private readonly IContainer _ioc;
 
-        public RackViewModel(IContainer ioc) => _ioc = ioc;
+        public RackViewModel(Player player, IContainer ioc)
+        {
+            Player = player;
+            _ioc = ioc;
+            FillRack(MaxSize);
+        }
 
         public BindableCollection<ITile> Tiles { get; set; } = new BindableCollection<ITile>();
 
@@ -22,20 +27,12 @@ namespace Scrabble.ViewModels
 
         public Orientation Orientation { get; set; }
 
-        public void ToggleRack(bool? toggle = null)
+        public void FillRack(int amount)
         {
-            foreach (var rack in Tiles)
-                rack.IsEnabled = toggle ?? !rack.IsEnabled;
-        }
-
-        public void AddPlayer(Player player)
-        {
-            Player = player;
-            for (int i = 0; i < MaxSize; i++)
+            for (int i = 0; i < amount; i++)
             {
-                var tile = new RackTile(player);
+                var tile = new RackTile(Player, _ioc);
                 Tiles.Add(tile);
-                _ioc.BuildUp(tile);
             }
         }
     }
